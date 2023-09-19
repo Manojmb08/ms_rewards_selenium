@@ -1,25 +1,42 @@
+import random
+import time
+
 from selenium import webdriver
-import time, random
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-opt = webdriver.EdgeOptions()
-# for mobile version
-opt.add_argument(
-    "user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1")
-opt.add_experimental_option("detach", True)
-driver = webdriver.Edge(options=opt)
-driver.get("https://www.bing.com")
-time.sleep(20)
 
-with open('songs.txt') as file:
-    k = file.readlines()
-    songs = [i[:-1] for i in k]
+def search(n):
+    for i in range(n):
+        print(i)
+        sear = driver.find_element(By.ID, "sb_form_q")
+        time.sleep(3)
+        sear.clear()
+        time.sleep(3)
+        sear.send_keys(random.choice(k) + Keys.ENTER)
 
-for i in range(30):
-    print(i)
-    sear = driver.find_element(By.ID, "sb_form_q")
-    time.sleep(3)
-    sear.clear()
-    time.sleep(3)
-    sear.send_keys(random.choice(k) + Keys.ENTER)
+
+
+def laptop(mobile):
+    n = 45
+    search(n)
+    # if mobile:
+    #     n = 30
+    #     opt.add_argument(
+    #         "user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1")
+    #     search(n)
+
+
+# mob()
+if __name__ == "__main__":
+    opt = webdriver.EdgeOptions()
+    # opt.add_experimental_option("detach", True) #to keep window open after search
+    opt.add_argument("user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/117.0.0.0")
+    driver = webdriver.Edge(options=opt)
+    driver.get("https://www.bing.com")
+    time.sleep(15)  # time required to login
+    with open('songs.txt') as file:
+        k = file.readlines()
+        songs = [i[:-1] for i in k]
+    mob = True  # for mobile set mob = True
+    laptop(mob)
