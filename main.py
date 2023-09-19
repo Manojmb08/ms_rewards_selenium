@@ -16,22 +16,12 @@ def search(n):
         sear.send_keys(random.choice(k) + Keys.ENTER)
 
 
-
-def laptop(mobile):
-    n = 45
-    search(n)
-    # if mobile:
-    #     n = 30
-    #     opt.add_argument(
-    #         "user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1")
-    #     search(n)
-
-
 # mob()
 if __name__ == "__main__":
     opt = webdriver.EdgeOptions()
     # opt.add_experimental_option("detach", True) #to keep window open after search
-    opt.add_argument("user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/117.0.0.0")
+    opt.add_argument(
+        "user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/117.0.0.0")  # for mobile enable this else comment this
     driver = webdriver.Edge(options=opt)
     driver.get("https://www.bing.com")
     time.sleep(15)  # time required to login
@@ -39,4 +29,7 @@ if __name__ == "__main__":
         k = file.readlines()
         songs = [i[:-1] for i in k]
     mob = True  # for mobile set mob = True
-    laptop(mob)
+    if mob:
+        search(30)
+    else:
+        search(45)
